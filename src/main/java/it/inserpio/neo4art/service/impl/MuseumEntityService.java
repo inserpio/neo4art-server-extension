@@ -45,7 +45,7 @@ public class MuseumEntityService implements MuseumService
   @SuppressWarnings("unchecked")
   public List<Museum> getMuseumsWithinDistance(double longitude, double latitude, double distanceInKm)
   {
-    return IteratorUtils.toList(this.museumRepository.findWithinDistance(MuseumRepository.MUSEUM_GEOSPATIAL_INDEX, latitude, longitude, distanceInKm).iterator());
+    return IteratorUtils.toList(this.museumRepository.findWithinDistance(MuseumRepository.MUSEUM_GEOSPATIAL_INDEX, longitude, latitude, distanceInKm).iterator());
   }
 
 }

@@ -55,13 +55,13 @@ public class MuseumRestController
   public Response getMuseumsWithinDistance(@PathParam("lon") double longitude, @PathParam("lat") double latitude, @PathParam("distanceInKm") double distanceInKm)
   {
     logger.info(String.format("GET /museums/lon/%s/lat/%s/distanceInKm/%s", longitude, latitude, distanceInKm));
+  
+      List<Museum> museumList = this.museumService.getMuseumsWithinDistance(longitude, latitude, distanceInKm);
     
-    List<Museum> museumList = this.museumService.getMuseumsWithinDistance(longitude, latitude, distanceInKm);
+      logger.info("Number of museums found: " + ((museumList != null) ? museumList.size() : "null"));
     
-    logger.info("Number of museums found: " + ((museumList != null) ? museumList.size() : "null"));
+      GenericEntity<List<Museum>> entity = new GenericEntity<List<Museum>>(museumList) {};
     
-    GenericEntity<List<Museum>> entity = new GenericEntity<List<Museum>>(museumList) {};
-    
-    return Response.ok(entity).build();
+      return Response.ok(entity).build();
   }
 }
