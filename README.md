@@ -12,7 +12,7 @@ To build and deploy jar artifacts simply run:
 
 
 The process of building will automatically build neo4art-server-extension-0.0.1.jar and copy dependencies to target/lib.
-*All jars must be copied into neo4j plugins directory*.
+All jar must be copied into neo4j plugins directory.
 
 
 
