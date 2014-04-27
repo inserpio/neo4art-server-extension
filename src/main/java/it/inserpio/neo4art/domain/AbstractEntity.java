@@ -15,11 +15,16 @@
  */
 package it.inserpio.neo4art.domain;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.springframework.data.neo4j.annotation.GraphId;
 
+@XmlTransient
 public abstract class AbstractEntity
 {
   @GraphId
+  @XmlElement(name="id")
   private Long id;
 
   public Long getId()

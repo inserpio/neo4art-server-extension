@@ -17,6 +17,9 @@ package it.inserpio.neo4art.domain;
 
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Indexed;
@@ -31,6 +34,8 @@ import org.springframework.data.neo4j.support.index.IndexType;
  */
 @NodeEntity
 @TypeAlias("MUSEUM")
+@XmlRootElement(name="museum")
+@JsonAutoDetect
 public class Museum extends AbstractEntity
 {
   public static final String LOCATED_IN        = "LOCATED_IN";

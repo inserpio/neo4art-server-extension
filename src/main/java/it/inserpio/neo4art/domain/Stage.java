@@ -17,6 +17,9 @@ package it.inserpio.neo4art.domain;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Fetch;
@@ -31,6 +34,8 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
  */
 @NodeEntity
 @TypeAlias("STAGE")
+@XmlRootElement(name="stage")
+@JsonAutoDetect
 public class Stage extends AbstractEntity
 {
   public static final String RELATIONSHIP_IN = "IN";

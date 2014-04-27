@@ -17,6 +17,9 @@ package it.inserpio.neo4art.domain;
 
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -29,6 +32,8 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
  */
 @NodeEntity
 @TypeAlias("CITY")
+@XmlRootElement(name="city")
+@JsonAutoDetect
 public class City extends AbstractEntity
 {
   @Indexed(unique=true)

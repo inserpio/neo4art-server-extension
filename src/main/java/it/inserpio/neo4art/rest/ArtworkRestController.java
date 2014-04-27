@@ -16,8 +16,8 @@
 
 package it.inserpio.neo4art.rest;
 
-import it.inserpio.neo4art.domain.Museum;
-import it.inserpio.neo4art.service.MuseumService;
+import it.inserpio.neo4art.domain.Artwork;
+import it.inserpio.neo4art.repository.ArtworkRepository;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -35,32 +35,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * 
  * @author Lorenzo Speranzoni
- * @since Apr 26, 2014
+ * @since Apr 27, 2014
  */
 
 @Controller
-@Path("/museums")
-public class MuseumRestController
+@Path("/artworks")
+public class ArtworkRestController
 {
-  private static final Logger logger = Logger.getLogger(MuseumRestController.class.getName());
+  private static final Logger logger = Logger.getLogger(ArtworkRestController.class.getName());
   
   @Context
-  private MuseumService museumService;
+  private ArtworkRepository artworkRepository;
   
   @GET
-  @Path("/lon/{lon}/lat/{lat}/distanceInKm/{distanceInKm}")
+  @Path("/museum/{museumId}")
   @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
   @Transactional
-  public Response getMuseumsWithinDistance(@PathParam("lon") double longitude, @PathParam("lat") double latitude, @PathParam("distanceInKm") double distanceInKm)
+  public Response getArtworksByMuseum(@PathParam("museumId") long museumId)
   {
-    logger.info(String.format("GET /museums/lon/%s/lat/%s/distanceInKm/%s", longitude, latitude, distanceInKm));
+    logger.info(String.format("GET /artworks/museum/%s", museumId));
     
-    List<Museum> museumList = this.museumService.getMuseumsWithinDistance(longitude, latitude, distanceInKm);
+    List<Artwork> artworkList = this.artworkRepository.findArtworkByMuseum(museumId);
     
-    logger.info("Number of museums found: " + ((museumList != null) ? museumList.size() : "null"));
+    logger.info("Number of artworks found: " + ((artworkList != null) ? artworkList.size() : "null"));
     
-    GenericEntity<List<Museum>> entity = new GenericEntity<List<Museum>>(museumList) {};
+    GenericEntity<List<Artwork>> entity = new GenericEntity<List<Artwork>>(artworkList) {};
     
     return Response.ok(entity).build();
   }

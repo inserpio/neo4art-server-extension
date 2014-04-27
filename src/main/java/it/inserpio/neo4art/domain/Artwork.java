@@ -16,6 +16,9 @@
 
 package it.inserpio.neo4art.domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Fetch;
@@ -29,6 +32,8 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
  */
 @NodeEntity
 @TypeAlias("ARTWORK")
+@XmlRootElement(name="artwork")
+@JsonAutoDetect
 public class Artwork extends AbstractEntity
 {
   public static final String AUTHOR = "AUTHOR";

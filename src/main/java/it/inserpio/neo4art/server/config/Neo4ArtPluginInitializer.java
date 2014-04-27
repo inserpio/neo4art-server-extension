@@ -16,6 +16,8 @@
 
 package it.inserpio.neo4art.server.config;
 
+import it.inserpio.neo4art.repository.ArtworkRepository;
+import it.inserpio.neo4art.repository.MuseumRepository;
 import it.inserpio.neo4art.service.MuseumService;
 
 import java.util.Collection;
@@ -42,9 +44,9 @@ public class Neo4ArtPluginInitializer extends SpringPluginInitializer
   {
     super(new String[] { "META-INF/spring/application-context.xml" },
           expose("neo4jTemplate", Neo4jTemplate.class),
-          expose("MuseumService", MuseumService.class));
-
-    System.out.println("******* Spring context configured *******");
+          expose("museumEntityService", MuseumService.class),
+          expose("museumRepository", MuseumRepository.class),
+          expose("artworkRepository", ArtworkRepository.class));
 
     logger.info("Spring context configured.");
   }
@@ -52,8 +54,6 @@ public class Neo4ArtPluginInitializer extends SpringPluginInitializer
   @Override
   public Collection<Injectable<?>> start(GraphDatabaseService graphDatabaseService, Configuration config)
   {
-    System.out.println("******* Starting spring context *******");
-    
     logger.info("Starting spring context...");
     Collection<Injectable<?>> injectableCollection = super.start(graphDatabaseService, config);
     logger.info("Spring context started.");
@@ -68,7 +68,17 @@ public class Neo4ArtPluginInitializer extends SpringPluginInitializer
       logger.info("Loading museumService...");
       MuseumService museumService = ctx.getBean(MuseumService.class);
       Assert.notNull(museumService, "Spring Data Neo4j failed to initialize!");
-      logger.info("Successfully loaded userRepository.");
+      logger.info("Successfully loaded museumService.");
+      
+      logger.info("Loading museumRepository...");
+      MuseumRepository museumRepository = ctx.getBean(MuseumRepository.class);
+      Assert.notNull(museumRepository, "Spring Data Neo4j failed to initialize!");
+      logger.info("Successfully loaded museumRepository.");
+      
+      logger.info("Loading artworkRepository...");
+      ArtworkRepository artworkRepository = ctx.getBean(ArtworkRepository.class);
+      Assert.notNull(artworkRepository, "Spring Data Neo4j failed to initialize!");
+      logger.info("Successfully loaded artworkRepository.");
     }
     catch (Exception e)
     {
@@ -76,8 +86,6 @@ public class Neo4ArtPluginInitializer extends SpringPluginInitializer
       
       logger.severe(e.getMessage());
     }
-
-    System.out.println("******* Finished spring context *******");
 
     return injectableCollection;
   }
