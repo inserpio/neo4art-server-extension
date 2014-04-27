@@ -5,7 +5,7 @@
 	<groupId>it.larusba.spikes.neo4j</groupId>
 	<artifactId>neo4art-server-extension</artifactId>
 	<version>0.0.1</version>
-	<description>neo4art spike for Neo4j server extension, Heroku, GrapheneDB, GeoSpatial, MapQuest</description>
+	<description>Neo4Art - Neo4j Server Extension implemented with Spring Data Neo4j</description>
 	<packaging>jar</packaging>
 
 	<properties>
