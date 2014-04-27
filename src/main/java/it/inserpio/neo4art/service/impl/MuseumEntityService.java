@@ -22,6 +22,7 @@ import it.inserpio.neo4art.service.MuseumService;
 
 import java.util.List;
 
+import org.apache.commons.collections.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,13 +42,10 @@ public class MuseumEntityService implements MuseumService
    */
   @Override
   @Transactional
+  @SuppressWarnings("unchecked")
   public List<Museum> getMuseumsWithinDistance(double longitude, double latitude, double distanceInKm)
   {
-    String withinDistance = String.format("withinDistance:[%s, %s, %s]", latitude,  longitude, distanceInKm);
-    
-    return this.museumRepository.findMuseumWithinDistance(withinDistance);
-
-    //return IteratorUtils.toList(this.museumRepository.findWithinDistance(MuseumRepository.MUSEUM_GEOSPATIAL_INDEX, latitude, longitude, distanceInKm).iterator());
+    return IteratorUtils.toList(this.museumRepository.findWithinDistance(MuseumRepository.MUSEUM_GEOSPATIAL_INDEX, latitude, longitude, distanceInKm).iterator());
   }
 
 }

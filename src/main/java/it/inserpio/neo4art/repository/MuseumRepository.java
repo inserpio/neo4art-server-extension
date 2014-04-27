@@ -40,7 +40,4 @@ public interface MuseumRepository extends GraphRepository<Museum>, SpatialReposi
   
   @Query("MATCH (a:ARTIST)<-[:AUTHOR]-(p:ARTWORK)-[:OFFICIAL_LOCATION]->(m:MUSEUM) WHERE id(a)={artistId} RETURN distinct(m) as museum") 
   List<Museum> findMuseumByArtist(@Param("artistId") long artistId);
-  
-  @Query("START museum=node:" + MuseumRepository.MUSEUM_GEOSPATIAL_INDEX + "({withinDistance}) RETURN museum") 
-  List<Museum> findMuseumWithinDistance(@Param("withinDistance") String withinDistance);
 }
