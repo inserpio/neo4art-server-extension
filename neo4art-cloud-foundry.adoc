@@ -31,8 +31,8 @@ The `cf` CLI is your primary tool for deploying and managing your applications.
 
 *DOWNLOAD*: https://github.com/cloudfoundry/cli/releases
 
-	_dmg_    : https://cli.run.pivotal.io/stable?release=macosx64&version=6.6.0&source=github-rel
-	_binary_ : https://cli.run.pivotal.io/stable?release=macosx64-binary&version=6.6.0&source=github-rel
+_dmg_    : https://cli.run.pivotal.io/stable?release=macosx64&version=6.6.0&source=github-rel
+_binary_ : https://cli.run.pivotal.io/stable?release=macosx64-binary&version=6.6.0&source=github-rel
 
 
 === Deploying Neo4art on Cloud Foundry
