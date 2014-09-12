@@ -60,8 +60,6 @@ public class MuseumRestController
     
       logger.info("Number of museums found: " + ((museumList != null) ? museumList.size() : "null"));
     
-      GenericEntity<List<Museum>> entity = new GenericEntity<List<Museum>>(museumList) {};
-    
-      return Response.ok(entity).build();
+      return Response.ok(new GenericEntity<List<Museum>>(museumList) {}).build();
   }
 }
